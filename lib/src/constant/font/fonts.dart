@@ -32,7 +32,7 @@ Widget boldtext(String title) {
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
           color: Colors.white.withOpacity(0.9),
-          fontSize: 18,
+          fontSize: 30,
           fontWeight: FontWeight.bold,
           letterSpacing: 1.25));
 }
@@ -54,7 +54,7 @@ Widget normaltext(String title) {
       style: TextStyle(
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
-          color: Colors.white.withOpacity(0.9),
+          color: Colors.black.withOpacity(0.9),
           fontSize: 15,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.25));
@@ -221,6 +221,8 @@ Widget readMoreChat(String title) {
 
 Widget showSnackBarText(String title) {
   return Text(title,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
       style: const TextStyle(
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
