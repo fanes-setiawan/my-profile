@@ -2,13 +2,10 @@
 
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
 
-import '../../../constant/api/api.dart';
 import '../../../constant/font/fonts.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -129,7 +126,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(1000.0),
                                 child: Image.network(
-                                  "${myapi().storage}/profile.png?alt=media&token=ec868fbe-8f4a-4106-a361-48fc9efd45bd",
+                                  "https://i.ibb.co/G7f2b9c/profile.png",
                                   loadingBuilder: (context, child, progress) {
                                     if (progress == null) {
                                       return child;
@@ -186,23 +183,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ],
                         ),
                       ],
-                    ),
-                    Container(
-                      height: 160.0,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            // "https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                            "https://i.ibb.co/G7f2b9c/profile.png",
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            8.0,
-                          ),
-                        ),
-                      ),
                     ),
                     boldtext('PORTOFOLIO'),
                     const SizedBox(
