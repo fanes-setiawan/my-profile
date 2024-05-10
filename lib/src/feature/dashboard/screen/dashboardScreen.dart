@@ -99,7 +99,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           width: MediaQuery.of(context).size.height / 2,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage(
+                              image: NetworkImage(
                                 'images/profile.png',
                               ),
                             ),
@@ -146,7 +146,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(),
                 child: Center(
-                  child: datetext("https://github.com/fanes-setiawan"),
+                  child: InkWell(
+                      onTap: () {},
+                      child: datetext("https://github.com/fanes-setiawan")),
                 ),
               ),
             ],
