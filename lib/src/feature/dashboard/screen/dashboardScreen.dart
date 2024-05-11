@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, file_names, deprecated_member_use
 
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
 
@@ -59,20 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: const MenuAcceleratorLabel('&About'),
                       ),
                     ],
-                    child: const MenuAcceleratorLabel('&File'),
-                  ),
-                  SubmenuButton(
-                    menuChildren: <Widget>[
-                      MenuItemButton(
-                        onPressed: () {},
-                        child: const MenuAcceleratorLabel('&Magnify'),
-                      ),
-                      MenuItemButton(
-                        onPressed: () {},
-                        child: const MenuAcceleratorLabel('Mi&nify'),
-                      ),
-                    ],
-                    child: const MenuAcceleratorLabel('&View'),
+                    child: const MenuAcceleratorLabel('Settings'),
                   ),
                 ],
               ),
@@ -156,25 +144,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Container(
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.telegram,
-                                      size: 45.0,
+                                  GestureDetector(
+                                    onTap: () {
+                                      _controller!.openInstagram();
+                                    },
+                                    child: SvgPicture.asset(
+                                      'icons/instagram.svg',
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.email,
-                                      size: 45.0,
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _controller!.openLinkedIn();
+                                    },
+                                    child: SvgPicture.asset(
+                                      'icons/linkedin.svg',
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.chat_bubble_outline,
-                                      size: 45.0,
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _controller!.openGitHub();
+                                    },
+                                    child: SvgPicture.asset(
+                                      'icons/github.svg',
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _controller!.openWhatsApp();
+                                    },
+                                    child: SvgPicture.asset(
+                                      'icons/whatsapp.svg',
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -259,8 +271,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 decoration: const BoxDecoration(),
                 child: Center(
                   child: InkWell(
-                      onTap: () {},
-                      child: datetext("https://github.com/fanes-setiawan")),
+                    onTap: () {
+                      const snackBar = SnackBar(
+                        content: Text(
+                            'RESTART!!! kembali ke tujuanmu yang dulu dimana dirimu dipenuhi ambisi',
+                            style: TextStyle(
+                                fontFamily: 'open sans',
+                                decoration: TextDecoration.none,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 1.02)),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                    child: datetext("don't give up | mobile dev"),
+                  ),
                 ),
               ),
             ],

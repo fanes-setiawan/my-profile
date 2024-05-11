@@ -1,4 +1,6 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, deprecated_member_use
+
+import 'package:url_launcher/url_launcher.dart';
 
 class dashboardController {
   void Function(void Function()) setState;
@@ -23,4 +25,45 @@ class dashboardController {
       "urlImage": "https://i.ibb.co/8cRjDLy/3.png",
     },
   ];
+
+  void openWhatsApp() async {
+    String phoneNumber = "+6288225409824";
+    String message = "Halo! Fanes Setiawan";
+    String url = "https://wa.me/$phoneNumber?text=${Uri.parse(message)}";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void openInstagram() async {
+    String username = "fanes404"; // ganti dengan nama pengguna Instagram Anda
+    String url = "https://www.instagram.com/$username/";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void openLinkedIn() async {
+    String username = "fanes-setiawan";
+    String url = "https://www.linkedin.com/in/$username/";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void openGitHub() async {
+    String username = "fanes-setiawan";
+    String url = "https://github.com/$username";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
