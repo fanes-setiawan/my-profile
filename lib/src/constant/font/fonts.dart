@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:readmore/readmore.dart';
 
-Widget tittletext(String title) {
-  return Text(title,
+Widget tittletext({String? title, double? fontSize}) {
+  return Text(title!,
       style: TextStyle(
           decoration: TextDecoration.none,
-          fontFamily: 'Roboto',
+          fontFamily: 'Roboto Mono',
           color: Colors.white.withOpacity(0.9),
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontSize: fontSize,
           letterSpacing: 1.25));
 }
 
@@ -26,13 +25,13 @@ Widget titleBold({required String title, double? fontSize}) {
           letterSpacing: 1.25));
 }
 
-Widget boldtext(String title) {
-  return Text(title,
+Widget boldtext({String? title, double? fontSize}) {
+  return Text(title!,
       style: TextStyle(
-          fontFamily: 'open sans',
+          fontFamily: 'Train One',
           decoration: TextDecoration.none,
           color: Colors.white.withOpacity(0.9),
-          fontSize: 30,
+          fontSize: fontSize,
           fontWeight: FontWeight.bold,
           letterSpacing: 1.25));
 }
@@ -66,7 +65,7 @@ Widget datetext(String title) {
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
           color: Colors.white.withOpacity(0.9),
-          fontSize: 10,
+          fontSize: 18,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.02));
 }

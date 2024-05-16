@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'src/feature/dashboard/screen/dashboardScreen.dart';
+import 'package:myprofile/src/feature/dashboard/screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +30,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const DashboardScreen(),
+      home: const HomeScreen(),
     );
   }
 }
