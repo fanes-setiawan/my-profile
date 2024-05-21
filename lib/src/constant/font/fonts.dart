@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:readmore/readmore.dart';
 
@@ -59,13 +60,13 @@ Widget normaltext(String title) {
           letterSpacing: 1.25));
 }
 
-Widget datetext(String title) {
+Widget datetext({required String title, required double fontSize}) {
   return Text(title,
       style: TextStyle(
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
           color: Colors.white.withOpacity(0.9),
-          fontSize: 18,
+          fontSize: fontSize,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.02));
 }

@@ -1,14 +1,14 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
 
 import '../../../constant/font/fonts.dart';
 import '../../widget/hoverable_card.dart';
 import '../../widget/widget_card_project.dart';
+import '../../widget/widget_experti_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,12 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
       Colors.red,
     ];
 
-    const colorizeTextStyle = TextStyle(
+    final colorizeTextStyle = TextStyle(
       decoration: TextDecoration.none,
       fontFamily: 'Roboto',
-      fontSize: 65,
+      fontSize: MediaQuery.of(context).size.width < 600 ? 25.sp : 18.sp,
       fontWeight: FontWeight.bold,
     );
+
     return Scaffold(
       backgroundColor: MyColors().black,
       body: SingleChildScrollView(
@@ -65,209 +66,193 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Stack(
                 children: [
                   Positioned(
-                    right: 20,
-                    top: 20,
+                    right: 20.w,
+                    top: 20.h,
                     child: Row(
                       children: [
                         TextButton.icon(
                           onPressed: () {},
-                          icon: const Icon(Icons.home_rounded),
-                          label: const Text("home"),
+                          icon: Icon(
+                            Icons.home_rounded,
+                            size: MediaQuery.of(context).size.width < 600
+                                ? 8.sp
+                                : 5.sp,
+                          ),
+                          label: Text("home",
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 8.sp
+                                        : 5.sp,
+                              )),
                         ),
                         TextButton.icon(
                           onPressed: () {},
-                          icon: const Icon(Icons.polymer_outlined),
-                          label: const Text("expertise"),
+                          icon: Icon(
+                            Icons.polymer_outlined,
+                            size: MediaQuery.of(context).size.width < 600
+                                ? 8.sp
+                                : 5.sp,
+                          ),
+                          label: Text("expertise",
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 8.sp
+                                        : 5.sp,
+                              )),
                         ),
                         TextButton.icon(
                           onPressed: () {},
-                          icon: const Icon(Icons.contact_page),
-                          label: const Text("contact"),
+                          icon: Icon(
+                            Icons.contact_page,
+                            size: MediaQuery.of(context).size.width < 600
+                                ? 8.sp
+                                : 5.sp,
+                          ),
+                          label: Text("contact",
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 8.sp
+                                        : 5.sp,
+                              )),
                         ),
                       ],
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 220.0,
-                        width: 220.0,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              "assets/images/profile.png",
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 80.sp,
+                          width: 80.sp,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/profile.png"),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(
-                              100.0,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.0),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            ColorizeAnimatedText(
-                              'FANES SETIAWAN',
-                              textStyle: colorizeTextStyle,
-                              colors: colorizeColors,
-                            ),
-                          ],
-                          isRepeatingAnimation: true,
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.phone_android_rounded,
-                            size: 24.0,
-                            color: MyColors().white,
-                          ),
-                          AnimatedTextKit(
-                            pause: const Duration(milliseconds: 2000),
+                        SizedBox(
+                          child: AnimatedTextKit(
                             animatedTexts: [
-                              TypewriterAnimatedText(
-                                'Mobile Developer',
-                                textStyle: TextStyle(
-                                    decoration: TextDecoration.none,
-                                    fontFamily: 'Roboto Mono',
-                                    color: Colors.white.withOpacity(0.9),
-                                    fontSize: 20,
-                                    letterSpacing: 1.25),
+                              ColorizeAnimatedText(
+                                'FANES SETIAWAN',
+                                textStyle: colorizeTextStyle,
+                                colors: colorizeColors,
                               ),
                             ],
+                            isRepeatingAnimation: true,
                             onTap: () {
                               print("Tap Event");
                             },
                           ),
-                        ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.phone_android_rounded,
+                              size: MediaQuery.of(context).size.width < 600
+                                  ? 15.sp
+                                  : 11.sp,
+                              color: MyColors().white,
+                            ),
+                            SizedBox(width: 5.w),
+                            AnimatedTextKit(
+                              pause: const Duration(milliseconds: 2000),
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  'Mobile Developer',
+                                  textStyle: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    fontFamily: 'Roboto Mono',
+                                    color: Colors.white.withOpacity(0.9),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 15.sp
+                                            : 11.sp,
+                                    letterSpacing: 1.25,
+                                  ),
+                                ),
+                              ],
+                              onTap: () {
+                                print("Tap Event");
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  boldtext(
+                    title: "My Expertise",
+                    fontSize: MediaQuery.of(context).size.width < 600
+                        ? 24.sp
+                        : 20.sp, // Menyesuaikan ukuran font berdasarkan lebar layar
+                  ),
+                  SizedBox(height: 20.h),
+                  Wrap(
+                    spacing: 20.w,
+                    runSpacing: 20.h,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      buildExpertiseCard(
+                        context,
+                        title: "Skills",
+                        iconPath: 'assets/icons/skil.svg',
+                        content: '''
+                          <
+                          Dart Programming
+                          Flutter Framework
+                          RESTful API Integration
+                          Git Version Control
+                          Firebase Integration
+                          />
+                        ''',
+                      ),
+                      buildExpertiseCard(
+                        context,
+                        title: "Flutter Dev",
+                        iconPath: 'assets/icons/flutter.svg',
+                        content: '''
+                          <
+                          Skilled in developing
+                          hybrid mobile apps and
+                          cross-platform solutions
+                          using the Flutter
+                          framework.
+                          />
+                        ''',
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            boldtext(
-              title: "My Expertise",
-              fontSize: 55,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(15.0),
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: 320.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: MyColors().white,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/skil.svg',
-                            color: MyColors().white,
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          tittletext(
-                            title: "Skills",
-                            fontSize: 50,
-                          ),
-                        ],
-                      ),
-                      datetext('''
-        <
-        Dart Programming
-        Flutter Framework
-        RESTful API Integration
-        Git Version Control
-        Firebase Integration
-        />
-        '''),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(15.0),
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: 320.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: MyColors().white,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/flutter.svg',
-                            color: MyColors().white,
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          tittletext(
-                            title: "Flutter Dev",
-                            fontSize: 50,
-                          ),
-                        ],
-                      ),
-                      datetext('''
-        <
-        Skilled in developing
-        hybrid mobile apps and
-        cross-platform solutions
-        using the Flutter
-        framework.
-        />
-        '''),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: 320.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: MyColors().white,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             Container(
               width: MediaQuery.of(context).size.width,
-              // height: 500,
-
-              height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.all(100),
+              padding: EdgeInsets.all(20.w),
               child: StreamBuilder(
                 stream:
                     _controller!.databaseReference.child('portfolio').onValue,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   if (snapshot.hasError) {
@@ -276,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   if (!snapshot.hasData ||
                       snapshot.data!.snapshot.value == null) {
-                    return Center(child: Text('No data available.'));
+                    return const Center(child: Text('No data available.'));
                   }
 
                   Map<dynamic, dynamic> data =
@@ -295,13 +280,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: 1.0,
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
+                      crossAxisCount: MediaQuery.of(context).size.width < 600
+                          ? 2
+                          : 3, // Menyesuaikan jumlah kolom berdasarkan lebar layar
+                      mainAxisSpacing: 10.h,
+                      crossAxisSpacing: 10.w,
                     ),
                     itemCount: items.length,
                     shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    physics: const ScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return HoverableCard(
                         child: WidgetCardProject(
@@ -314,13 +301,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 50.0,
-            ),
             Container(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(
+                  MediaQuery.of(context).size.width < 600 ? 20.w : 5.w),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
               ),
@@ -340,17 +323,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             SvgPicture.asset(
                               'assets/icons/instagram.svg',
                               color: Colors.white,
+                              height: 20.h,
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            SizedBox(width: 10.w),
                             overviewtext('Instagram'),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
+                      SizedBox(height: 10.h),
                       GestureDetector(
                         onTap: () {
                           _controller!.openLinkedIn();
@@ -360,17 +340,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             SvgPicture.asset(
                               'assets/icons/linkedin.svg',
                               color: Colors.white,
+                              height: 20.h,
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            SizedBox(width: 10.w),
                             overviewtext('Linkedin'),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
+                      SizedBox(height: 10.h),
                       GestureDetector(
                         onTap: () {
                           _controller!.openGitHub();
@@ -380,17 +357,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             SvgPicture.asset(
                               'assets/icons/github.svg',
                               color: Colors.white,
+                              height: 20.h,
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            SizedBox(width: 10.w),
                             overviewtext('Github'),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
+                      SizedBox(height: 10.h),
                       GestureDetector(
                         onTap: () {
                           _controller!.openWhatsApp();
@@ -400,17 +374,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             SvgPicture.asset(
                               'assets/icons/whatsapp.svg',
                               color: Colors.white,
+                              height: 20.h,
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            SizedBox(width: 10.w),
                             overviewtext('Whatsapp'),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  datetext("fanessetiawan.1401@gmail.com"),
+                  overviewtext("fanessetiawan.1401@gmail.com"),
                 ],
               ),
             ),

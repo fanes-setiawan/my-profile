@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myprofile/firabase.dart';
 import 'package:myprofile/src/feature/dashboard/screen/home_screen.dart';
 // import 'package:myprofile/x/x.dart';
@@ -18,15 +19,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'fanes setiawan',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
-      ),
-      // home: X(),
-      home: const HomeScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812), // Sesuaikan dengan ukuran desain Anda
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }
