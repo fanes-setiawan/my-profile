@@ -1,10 +1,13 @@
 // ignore_for_file: camel_case_types, deprecated_member_use
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class dashboardController {
   void Function(void Function()) setState;
   dashboardController({required this.setState});
+  final databaseReference = FirebaseDatabase.instance.reference();
+  int? hoveredIndex;
   List<Map<String, dynamic>> dataPorto = [
     {
       "title": "Fugi_movie_app_team5",

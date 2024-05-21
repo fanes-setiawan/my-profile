@@ -7,6 +7,8 @@ import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
 
 import '../../../constant/font/fonts.dart';
+import '../../widget/hoverable_card.dart';
+import '../../widget/widget_card_project.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -253,6 +255,64 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              // height: 500,
+
+              height: MediaQuery.of(context).size.height,
+              padding: EdgeInsets.all(100),
+              child: StreamBuilder(
+                stream:
+                    _controller!.databaseReference.child('portfolio').onValue,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+
+                  if (!snapshot.hasData ||
+                      snapshot.data!.snapshot.value == null) {
+                    return Center(child: Text('No data available.'));
+                  }
+
+                  Map<dynamic, dynamic> data =
+                      snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
+                  List<Map<dynamic, dynamic>> items = [];
+
+                  data.forEach((key, value) {
+                    Map<dynamic, dynamic> item = value as Map<dynamic, dynamic>;
+                    item['key'] = key;
+                    items.add(item);
+                  });
+
+                  items = items.reversed.toList();
+
+                  return GridView.builder(
+                    padding: EdgeInsets.zero,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 1.0,
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemCount: items.length,
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return HoverableCard(
+                        child: WidgetCardProject(
+                          items: items,
+                          index: index,
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
             const SizedBox(
               height: 50.0,
