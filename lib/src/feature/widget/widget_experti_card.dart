@@ -32,9 +32,10 @@ Widget buildExpertiseCard(BuildContext context,
             ),
             SizedBox(width: 10.w),
             tittletext(
-              title: title,
-              fontSize: MediaQuery.of(context).size.width < 600 ? 18.sp : 18.sp,
-            ),
+                title: title,
+                fontSize:
+                    MediaQuery.of(context).size.width < 600 ? 18.sp : 18.sp,
+                color: Colors.white.withOpacity(0.9)),
           ],
         ),
         SizedBox(height: 10.h),

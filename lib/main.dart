@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myprofile/firabase.dart';
 import 'package:myprofile/src/feature/dashboard/screen/home_screen.dart';
+import 'package:pod_player/pod_player.dart';
 // import 'package:myprofile/x/x.dart';
 
 void main() async {
@@ -10,6 +11,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  PodVideoPlayer.enableLogs = true;
   runApp(const MyApp());
 }
 

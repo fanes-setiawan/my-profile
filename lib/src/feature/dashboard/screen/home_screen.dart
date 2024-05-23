@@ -2,8 +2,11 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
+import 'package:pod_player/pod_player.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constant/font/fonts.dart';
 import '../../widget/hoverable_card.dart';
@@ -19,10 +22,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   dashboardController? _controller;
+  late final PodPlayerController controller;
 
   @override
   void initState() {
+    controller = PodPlayerController(
+      playVideoFrom: PlayVideoFrom.youtube('https://youtu.be/A3ltMaM6noM'),
+    )..initialise();
     _controller = dashboardController(setState: setState);
+
     super.initState();
   }
 
@@ -290,10 +298,96 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     physics: const ScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      return HoverableCard(
-                        child: WidgetCardProject(
-                          items: items,
-                          index: index,
+                      return GestureDetector(
+                        onTap: () async {
+                          await showDialog<void>(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) {
+                              DateTime time =
+                                  DateTime.parse(items[index]['time']);
+                              String formattedTime =
+                                  DateFormat('hh:mm:ss a EEE d MMM y')
+                                      .format(time);
+
+                              return AlertDialog(
+                                content: Container(
+                                  width: 500,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          formattedTime,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 560,
+                                        height: 315,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: PodVideoPlayer(
+                                          controller: controller,
+                                          videoThumbnail: DecorationImage(
+                                            image: NetworkImage(
+                                              items[index]['urlImage'],
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10.0),
+                                      Text(
+                                        items[index]['title'],
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10.0),
+                                      Text(
+                                        items[index]['detail'],
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black.withOpacity(0.6),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          final url = items[index]['urlGithub'];
+                                          if (await canLaunch(url)) {
+                                            await launch(url);
+                                          } else {
+                                            throw 'Could not launch $url';
+                                          }
+                                        },
+                                        child: Text(
+                                          'Link Github',
+                                          style: TextStyle(color: Colors.blue),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: HoverableCard(
+                          child: WidgetCardProject(
+                            items: items,
+                            index: index,
+                          ),
                         ),
                       );
                     },

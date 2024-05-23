@@ -1,27 +1,26 @@
 // ignore: file_names
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:readmore/readmore.dart';
 
-Widget tittletext({String? title, double? fontSize}) {
+Widget tittletext({String? title, double? fontSize, required Color color}) {
   return Text(title!,
       style: TextStyle(
           decoration: TextDecoration.none,
           fontFamily: 'Roboto Mono',
-          color: Colors.white.withOpacity(0.9),
+          color: color,
           fontSize: fontSize,
           letterSpacing: 1.25));
 }
 
-Widget titleBold({required String title, double? fontSize}) {
+Widget titleBold(
+    {required String title, double? fontSize, required Color color}) {
   return Text(title,
       style: TextStyle(
           decoration: TextDecoration.none,
           fontFamily: 'Roboto',
           fontSize: fontSize,
-          color: MyColors().white,
+          color: color,
           fontWeight: FontWeight.bold,
           letterSpacing: 1.25));
 }
