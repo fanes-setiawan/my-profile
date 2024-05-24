@@ -5,13 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:myprofile/src/constant/colors/myColors.dart';
 import 'package:myprofile/src/feature/dashboard/controller/dashboardController.dart';
-import 'package:pod_player/pod_player.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constant/font/fonts.dart';
 import '../../widget/hoverable_card.dart';
 import '../../widget/widget_card_project.dart';
 import '../../widget/widget_experti_card.dart';
+import '../../widget/youtube_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +23,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   dashboardController? _controller;
-  late final PodPlayerController controller;
 
   @override
   void initState() {
-    controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.youtube('https://youtu.be/A3ltMaM6noM'),
-    )..initialise();
     _controller = dashboardController(setState: setState);
 
     super.initState();
@@ -310,6 +307,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   DateFormat('hh:mm:ss a EEE d MMM y')
                                       .format(time);
 
+                              print(items[index]['urlVideo']);
+
                               return AlertDialog(
                                 content: Container(
                                   width: 500,
@@ -334,14 +333,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
-                                        child: PodVideoPlayer(
-                                          controller: controller,
-                                          videoThumbnail: DecorationImage(
-                                            image: NetworkImage(
-                                              items[index]['urlImage'],
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
+                                        child: WidgetYouTubePlay(
+                                          context,
+                                          items[index]['urlVideo'],
                                         ),
                                       ),
                                       const SizedBox(height: 10.0),
@@ -355,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       const SizedBox(height: 10.0),
                                       Text(
-                                        items[index]['detail'],
+                                        items[index]['detail'].toString(),
                                         style: TextStyle(
                                           fontSize: 14,
                                           color: Colors.black.withOpacity(0.6),
