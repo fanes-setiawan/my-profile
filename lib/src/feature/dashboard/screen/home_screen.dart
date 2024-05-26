@@ -289,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? 2
                           : 3, // Menyesuaikan jumlah kolom berdasarkan lebar layar
                       mainAxisSpacing: 10.h,
-                      crossAxisSpacing: 10.w,
+                      crossAxisSpacing: 10.h,
                     ),
                     itemCount: items.length,
                     shrinkWrap: true,
@@ -310,67 +310,73 @@ class _HomeScreenState extends State<HomeScreen> {
                               print(items[index]['urlVideo']);
 
                               return AlertDialog(
-                                content: Container(
-                                  width: 500,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: Text(
-                                          formattedTime,
+                                content: SingleChildScrollView(
+                                  controller: ScrollController(),
+                                  child: Container(
+                                    width: 500,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            formattedTime,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 560,
+                                          height: 315,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: WidgetYouTubePlay(
+                                            context,
+                                            items[index]['urlVideo'],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10.0),
+                                        Text(
+                                          items[index]['title'],
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 560,
-                                        height: 315,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                        const SizedBox(height: 10.0),
+                                        Text(
+                                          items[index]['detail'].toString(),
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color:
+                                                Colors.black.withOpacity(0.6),
+                                          ),
                                         ),
-                                        child: WidgetYouTubePlay(
-                                          context,
-                                          items[index]['urlVideo'],
+                                        const SizedBox(height: 10.0),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            final url =
+                                                items[index]['urlGithub'];
+                                            if (await canLaunch(url)) {
+                                              await launch(url);
+                                            } else {
+                                              throw 'Could not launch $url';
+                                            }
+                                          },
+                                          child: Text(
+                                            'Link Github',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 10.0),
-                                      Text(
-                                        items[index]['title'],
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10.0),
-                                      Text(
-                                        items[index]['detail'].toString(),
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.black.withOpacity(0.6),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10.0),
-                                      GestureDetector(
-                                        onTap: () async {
-                                          final url = items[index]['urlGithub'];
-                                          if (await canLaunch(url)) {
-                                            await launch(url);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-                                        },
-                                        child: Text(
-                                          'Link Github',
-                                          style: TextStyle(color: Colors.blue),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
