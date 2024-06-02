@@ -307,7 +307,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   DateFormat('hh:mm:ss a EEE d MMM y')
                                       .format(time);
 
+                              String urlVideo = items[index]['urlVideo'];
+                              print("------------------------------------");
                               print(items[index]['urlVideo']);
+                              print("------------------------------------");
 
                               return AlertDialog(
                                 content: SingleChildScrollView(
@@ -336,8 +339,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 BorderRadius.circular(10),
                                           ),
                                           child: WidgetYouTubePlay(
-                                            context,
-                                            items[index]['urlVideo'],
+                                            urlYoutube: urlVideo,
+                                            viewId: urlVideo,
                                           ),
                                         ),
                                         const SizedBox(height: 10.0),
